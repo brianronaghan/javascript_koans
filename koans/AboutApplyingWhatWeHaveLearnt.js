@@ -100,11 +100,29 @@ console.log(ingredientCount);
     var ingredientCount = { "{ingredient name}": 0 };
     console.log(ingredientCount);
 
-      // map ingredient name /number
-      //flatten all ingredient lists into one big Array
-      // reduce
+ingredientCount =  _(products).chain()
 
+          .map(function(pizza){return pizza.ingredients})
+          .flatten()
+          //right now it's an array of all ingredients
+         .reduce(function(acc,spot){
+              if(acc[spot]){
+                acc[spot]++;
+              }
+              else{
+                  acc[spot]=1;
+              }
+
+              return acc;
+
+          },{ "{ingredient name}": 0 })
+
+
+.value();
+      //flatten that to one array
+      // map just ingredients
     /* chain() together map(), flatten() and reduce() */
+    console.log(ingredientCount);
 
     expect(ingredientCount['mushrooms']).toBe(2);
   });
